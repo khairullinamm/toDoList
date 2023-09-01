@@ -9,7 +9,7 @@ html {
 }
 .container {
     width: 50vw;
-    height: 50vh;
+    min-height: 50vh;
 
     background:  rgb(3, 27, 60);
     border-radius: 15px;
@@ -18,6 +18,10 @@ html {
     margin-top: 40px;
 
     padding: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .title {
@@ -68,4 +72,48 @@ form {
     margin-left: 10px;
 
     background: url('../img/new-task.svg') no-repeat center #b2c541;
+}
+
+.todo__list {
+    color:#fff;
+    text-align: left;
+
+    width: 30vw;
+
+    display: flex;
+    flex-direction: column;
+}
+
+li {
+    height: 30px;
+
+    position: relative;
+
+    margin-top: 5px;
+
+    display: flex;
+    align-items: center;
+
+}
+
+li::after {
+    content: "";
+
+    width: 20vw;
+    height: 1px;
+
+    background-color: rgba(255,255,255,0.24);
+
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+}
+
+.button__complete {
+    margin-left: 10px;
+}
+
+.task__complete {
+    color: red;
+    text-decoration: line-through;
 }
