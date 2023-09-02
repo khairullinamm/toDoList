@@ -28,6 +28,7 @@ function colorEvenTasks(flag) {
     }
 
 }
+
 toDoForm.addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -36,17 +37,19 @@ toDoForm.addEventListener('submit', function(e) {
     
     let toDoTask = createToDoTask(input.value);
 
-    if (toDoList.classList.contains("color__odd"))
-        colorOddTasks(true);
-    if (toDoList.classList.contains('color__even'))
-        colorEvenTasks(true);
+    if (toDoList.classList.contains("color__odd")) colorOddTasks(true);
+    if (toDoList.classList.contains('color__even')) colorEvenTasks(true);
 
     toDoTask.btnComplete.addEventListener("click", function() {
-        changeTasksOrders(toDoTask.task, toDoTask.taskText.classList.toggle('task__complete'));
+        console.log(toDoTask)
+        changeTasksOrders(toDoTask.taskText.textContent);
+        console.log("here");
     })
+
     toDoTask.btnDelete.addEventListener("click", function() {
         toDoTask.task.remove();
     })
+
     function createToDoTask(text) {
         let task = document.createElement('li');
         let taskText = document.createElement('span');
@@ -57,11 +60,9 @@ toDoForm.addEventListener('submit', function(e) {
         btnComplete.classList.add('item-btn', 'btn__complete');
         btnComplete.classList.add('item-btn', 'btn__delete');
 
-        btnComplete.innerHTML = 'Complete';
-        btnDelete.innerHTML = 'Delete';
-        taskText.innerHTML = text;
-
-        task.style.order = toDoList.children.length;
+        btnComplete.textContent = 'Complete';
+        btnDelete.textContent = 'Delete';
+        taskText.textContent = text;
 
         toDoList.append(task);
         task.append(taskText, btnComplete, btnDelete);
@@ -73,28 +74,19 @@ toDoForm.addEventListener('submit', function(e) {
             btnDelete
         }
     }
-    function changeTasksOrders(task, flag) {
-        let minOrder = 0;
-
-        if (flag) {
-            for (let element of toDoList.children) {
-                if (element !== task && Number(element.style.order) > 0)
-                    element.style.order = Number(element.style.order) - 1;
-            }
-            task.style.order = Number(toDoList.children.length) - 1;
-            toDoTask.btnComplete.innerHTML = 'Return';
-
-        } else {
-            for (let element of toDoList.children) {
-                if (element !== task)
-                    element.style.order = Number(element.style.order) + 1;
-                minOrder = element.style.order < minOrder ? element.style.order : minOrder;
-            }
-            task.style.order = Number(minOrder);
-            toDoTask.btnComplete.innerHTML = 'Complete';
+    function changeTasksOrders(text) { //if we want to complete task
+    
+        if (toDoTask.taskText.classList.toggle('task__complete')) {
+            toDoTaskCopy = toDoTask;
+            toDoTask.task.remove();
+            toDoList.append(toDoTaskCopy.task);
+            
+            toDoTaskCopy.btnComplete.textContent = "Return task";
         }
+        else 
+            toDoTask.btnComplete.textContent = "Complete task";
     }
-
+    console.log(toDoTask)
 })
 
 btnDeleteLast.addEventListener('click', function() {
