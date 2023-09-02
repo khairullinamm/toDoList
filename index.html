@@ -13,16 +13,19 @@
             <input type="text" class="task__text">
             <button class="add__task"></button>
         </form>
-
         <ul class="todo__list">
         </ul>
+        <p class="duplicate">Such a task has already been added to the list</p>
         
     </div>
-    <div class="nav__btn">
-        <button class="btn delete__first">Delete first element</button>
-        <button class="btn delete__last">Delete last element</button>
-        <button class="btn color__odd">Сolor odd tasks</button>
-        <button class="btn color__even">Сolor even tasks</button>
+    <div class="nav">
+        <div class="nav__btn">
+            <button class="btn delete__first">Delete first element</button>
+            <button class="btn delete__last">Delete last element</button>
+            <button class="btn color__odd">Сolor odd tasks</button>
+            <button class="btn color__even">Сolor even tasks</button>
+        </div>
+        <p class="warning">The button action cannot be performed because there are no active tasks.</p>
     </div>
     <script src="./script/script.js"></script>
 </body>

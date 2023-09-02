@@ -9,7 +9,7 @@ html {
     
 }
 
-.nav__btn {
+.nav {
     background-color: #252632;
 
     padding: 30px;
@@ -20,12 +20,15 @@ html {
 
     border-radius: 30px;
 
+    box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.21);
+}
+
+.nav__btn {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.21);
 }
+
 .btn {
     padding: 10px;
     border-radius: 30px;
@@ -49,7 +52,17 @@ html {
     background-color: #211b4e;
 }
 
+.warning {
+    color: red;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
 
+    margin-bottom: 0;
+    display: none;
+
+    transition: display 0.5s;
+}
 .container {
     width: 50vw;
     min-height: 50vh;
@@ -89,6 +102,13 @@ form {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.duplicate {
+    color: red;
+    display: none;
+
+    font-weight: 600;
 }
 
 .task__text {
@@ -140,7 +160,6 @@ form {
 }
 
 .item__task  {
-    
     padding: 10px;
     padding-left: 20px;
 
@@ -159,7 +178,6 @@ form {
 
     opacity: 1;
     transition: opacity 0.5s;
-
 }
 
 .btn__delete {
@@ -167,6 +185,7 @@ form {
 }
 
 .task__complete {
+    transition: color text-decoration 0.5s;
     color: red;
     text-decoration: line-through;
 }
