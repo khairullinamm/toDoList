@@ -117,3 +117,11 @@ li::after {
     color: red;
     text-decoration: line-through;
 }
+
+.odd:nth-child(odd) {
+    background-color: #796d6d;
+}
+
+.even:nth-child(even) {
+    background-color: #8982bc;
+}
