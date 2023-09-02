@@ -5,23 +5,69 @@ html {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
 
-    background-color: #b2c541;
+    background-color: #1d2026;
+    
 }
+
+.nav__btn {
+    background-color: #252632;
+
+    padding: 30px;
+    width: 50vw;
+
+    margin: 0 auto;
+    margin-top: 30px;
+
+    border-radius: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.21);
+}
+.btn {
+    padding: 10px;
+    border-radius: 30px;
+
+    background-color: #6558cf;
+    border: none;
+    color:#fff;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: background-color 0.4s;
+}
+
+.btn:hover {
+    background-color: #352d74;
+}
+
+.btn:active {
+    background-color: #211b4e;
+}
+
+
 .container {
     width: 50vw;
     min-height: 50vh;
 
-    background:  rgb(3, 27, 60);
-    border-radius: 15px;
+    background:  #6558cf;
+    border-radius: 30px;
 
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 40px; 
 
     padding: 20px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    box-shadow: 4px 4px 24px 0px rgba(0, 0, 0, 0.21);
+
 }
 
 .title {
@@ -38,9 +84,11 @@ form {
     margin: 0 auto;
     margin-top: 30px;
 
+    width: 34vw;
+
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .task__text {
@@ -69,23 +117,34 @@ form {
     border-radius: 38px;
     border: none;
 
-    margin-left: 10px;
+   /* margin-left: 10px;*/
 
-    background: url('../img/new-task.svg') no-repeat center #b2c541;
+    background: url('../img/new-task.svg') no-repeat center #252632;
+
+    transition: background-color 0.4s;
+}
+
+.add__task:hover {
+    background-color: #191921;
+}
+
+.add__task:active {
+    background-color: #000000;
 }
 
 .todo__list {
     color:#fff;
     text-align: left;
 
-    width: 30vw;
-
-    display: flex;
-    flex-direction: column;
+    width: 34vw;
 }
 
-li {
-    height: 30px;
+.item__task  {
+    
+    padding: 10px;
+    padding-left: 20px;
+
+    font-weight: 600;
 
     position: relative;
 
@@ -93,24 +152,15 @@ li {
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
+
+    background-color: #252632;
+    border-radius: 30px;
 
 }
 
-li::after {
-    content: "";
-
-    width: 20vw;
-    height: 1px;
-
-    background-color: rgba(255,255,255,0.24);
-
-    position: absolute;
-    left: 0;
-    bottom: 5px;
-}
-
-.button__complete {
-    margin-left: 10px;
+.btn__delete {
+    margin-left: 20px;
 }
 
 .task__complete {
@@ -119,9 +169,10 @@ li::after {
 }
 
 .odd:nth-child(odd) {
-    background-color: #796d6d;
+    background-color: #341445;
 }
 
 .even:nth-child(even) {
     background-color: #8982bc;
 }
+

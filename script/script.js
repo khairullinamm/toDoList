@@ -55,17 +55,19 @@ toDoForm.addEventListener('submit', function(e) {
         let taskText = document.createElement('span');
         let btnComplete = document.createElement('button');
         let btnDelete = document.createElement('button');
+        let divBtn = document.createElement('div');
 
         task.classList.add('item__task');
-        btnComplete.classList.add('item-btn', 'btn__complete');
-        btnComplete.classList.add('item-btn', 'btn__delete');
+        btnComplete.classList.add('btn', 'btn__complete');
+        btnDelete.classList.add('btn', 'btn__delete');
 
         btnComplete.textContent = 'Complete';
         btnDelete.textContent = 'Delete';
         taskText.textContent = text;
 
         toDoList.append(task);
-        task.append(taskText, btnComplete, btnDelete);
+        task.append(taskText, divBtn);
+        divBtn.append(btnComplete, btnDelete);
 
         return  {
             task,
