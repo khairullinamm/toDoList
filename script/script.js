@@ -47,7 +47,8 @@ toDoForm.addEventListener('submit', function(e) {
     })
 
     toDoTask.btnDelete.addEventListener("click", function() {
-        toDoTask.task.remove();
+        toDoTask.task.style.opacity = 0;
+        setTimeout(() => { toDoTask.task.remove(); }, 2000);
     })
 
     function createToDoTask(text) {
@@ -92,7 +93,9 @@ toDoForm.addEventListener('submit', function(e) {
 })
 
 btnDeleteLast.addEventListener('click', function() {
-    toDoList.lastChild.remove();
+    toDoList.lastChild.style.opacity = 0;
+    setTimeout(() => { toDoList.lastChild.remove(); }, 2000);
+    
     if (toDoList.classList.contains('color__odd'))
         colorOddTasks(true);
     if (toDoList.classList.contains('color__even'))

@@ -157,6 +157,9 @@ form {
     background-color: #252632;
     border-radius: 30px;
 
+    opacity: 1;
+    transition: opacity 0.5s;
+
 }
 
 .btn__delete {
@@ -169,10 +172,12 @@ form {
 }
 
 .odd:nth-child(odd) {
-    background-color: #341445;
+    transition: background-color 0.6s;
+    background-color: #422054;
 }
 
 .even:nth-child(even) {
+    transition: background-color 0.6s;
     background-color: #8982bc;
 }
 
