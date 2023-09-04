@@ -84,7 +84,7 @@ function createToDoTask(text) {
         document.querySelector('.duplicate').style.display = 'none';
         
         task.style.opacity = 0;
-        setTimeout(() => { task.remove(); }, 600);
+        setTimeout(() => { task.remove(); }, 301);
 
         allTasks.splice(indexItem,1); 
 
