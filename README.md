@@ -1,5 +1,4 @@
 # toDoList
-App "To do list" using HTML/CSS/JS
 ![Иллюстрация к проекту](img/main.png)
 
 ## Description
@@ -32,7 +31,7 @@ You can:
 1. You cannot enter more than 25 characters
 2. You cannot enter the same tasks
 3. You cannot use the buttons in the navigation bar if there are no tasks
-4. Even tasks cannot be marked with color if there is only 1 task
+4. "Even" tasks cannot be marked with color if there is only 1 task
    
 ## Project status
 _Project is: complete._
