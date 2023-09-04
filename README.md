@@ -1,6 +1,6 @@
 # toDoList
 App "To do list" using HTML/CSS/JS
-![Иллюстрация к проекту](main.png)
+![Иллюстрация к проекту](img/main.png)
 
 ## Description
 The "To do list" project is a web application with the ability to add tasks, marking their completion, deleting them and storing them in local storage.
