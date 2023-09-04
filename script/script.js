@@ -131,6 +131,7 @@ toDoForm.addEventListener('submit', function(e) {
     e.preventDefault();
     
     document.querySelector('.duplicate').style.display = 'none';
+    document.querySelector('.warning').style.display = 'none';
     btnAddTask.disabled = true;
 
     input.addEventListener('input', () => {
