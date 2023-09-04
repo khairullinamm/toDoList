@@ -49,6 +49,11 @@ function addItemsColor() {
 }
 function createToDoTask(text) {
 
+    if (text.length > 25) {
+        showMsgAboutLongText();
+        return false;
+    }
+
     let task = document.createElement('li');
     let taskText = document.createElement('span');
     let btnComplete = document.createElement('button');
@@ -136,7 +141,9 @@ toDoForm.addEventListener('submit', function(e) {
         return;
 
     let toDoTask = createToDoTask(input.value);
-    
+    if (!toDoTask)
+        return;
+
     allTasks.push ({
         complete: false,
         taskText: toDoTask.taskText.textContent,
@@ -151,6 +158,7 @@ toDoForm.addEventListener('submit', function(e) {
     saveList();
 })
 function checkDuplicate() {
+    document.querySelector('.duplicate').textContent = "Such a task has already been added to the list.";
     let flag = true;
     allTasks.forEach(item => {
         if(item.taskText === input.value) {
@@ -212,6 +220,10 @@ function saveList() {
 
     localStorage.setItem('odd', oddFlag);
     localStorage.setItem('even', evenFlag);
+}
+function showMsgAboutLongText() {
+    document.querySelector('.duplicate').style.display =  "block";
+    document.querySelector('.duplicate').textContent = "The maximum length of the task is 25 characters.";
 }
 btnDeleteLast.addEventListener('click', function() {
     document.querySelector('.duplicate').style.display = 'none';
