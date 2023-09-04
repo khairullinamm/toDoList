@@ -121,6 +121,8 @@ form {
     box-sizing: border-box;
 
     font-weight: 600;
+
+    padding-left: 10px;
 }
 
 .task__text:hover, .task__text:active, .task__text:focus {
