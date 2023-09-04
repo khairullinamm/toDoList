@@ -231,7 +231,7 @@ btnDeleteLast.addEventListener('click', function() {
     if (showWarning('default'))
     {
         toDoList.lastChild.style.opacity = 0;
-        setTimeout(() => { toDoList.lastChild.remove(); }, 2000);
+        setTimeout(() => { toDoList.lastChild.remove(); }, 0.301);
 
         if (toDoList.classList.contains('color__odd')) 
             colorOddTasks(true);
@@ -248,7 +248,7 @@ btnDeleteFirst.addEventListener('click', function() {
     if (showWarning('default')) {
 
         toDoList.children[0].style.opacity = 0;
-        setTimeout(() => { toDoList.children[0].remove(); }, 2000);
+        setTimeout(() => { toDoList.children[0].remove(); }, 0.301);
 
         if (toDoList.classList.contains('color__odd'))
             colorOddTasks(true);
