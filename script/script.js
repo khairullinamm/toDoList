@@ -1,22 +1,23 @@
 
-let toDoForm =  document.forms.todo__form;
-let toDoList = document.querySelector('.todo__list');
-let input = toDoForm.elements[0];
-
-let btnAddTask = document.querySelector('.add__task');
-let btnDeleteLast = document.querySelector('.delete__last');
-let btnDeleteFirst = document.querySelector('.delete__first');
-let btnColorOdd = document.querySelector('.color__odd');
-let btnColorEven = document.querySelector('.color__even');
-let warningText = document.querySelector('.warning');
+const toDoForm =  document.forms.todo__form;
+const toDoList = document.querySelector('.todo__list');
+const input = toDoForm.elements[0];
+const btnAddTask = document.querySelector('.add__task');
+const btnDeleteLast = document.querySelector('.delete__last');
+const btnDeleteFirst = document.querySelector('.delete__first');
+const btnColorOdd = document.querySelector('.color__odd');
+const btnColorEven = document.querySelector('.color__even');
+const warningText = document.querySelector('.warning');
 
 let allTasks = [];
 let index = -1;
 let oddFlag = false;
 let evenFlag = false;
-console.log(allTasks)
+
+
 function checkLocalStorage() {
-    if (localStorage.length === 2) //там только odd и even
+    
+    if (localStorage.length === 2) //only even and odd
         return;
 
     for (let len = 0; len < localStorage.length - 2; len++ ) {
@@ -26,59 +27,26 @@ function checkLocalStorage() {
 
     addItemsColor();
 }
-function createToDoApp() {
-    checkLocalStorage();
+function addSaveTasks(item) {
+    
+    allTasks.push(item);
+    toDoTask = createToDoTask(item.taskText);
+
+    if (item.complete === true) { 
+        toDoTask.taskText.classList.toggle('task__complete')
+        toDoTask.btnComplete.textContent = "Return task";
+    }
 }
-
-toDoForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    document.querySelector('.duplicate').style.display = 'none';
-    btnAddTask.disabled = true;
-
-    input.addEventListener('input', () => {
-        if (input.value) btnAddTask.disabled = false;
-    })
-
-    if (!input.value || !(checkDuplicate()))
-        return;
-
-    let toDoTask = createToDoTask(input.value);
+function addItemsColor() {
     
-    allTasks.push ({
-        complete: false,
-        taskText: toDoTask.taskText.textContent,
-        index
-    });
-    
-    if (toDoList.classList.contains("color__odd")) colorOddTasks(true);
-    if (toDoList.classList.contains('color__even')) colorEvenTasks(true);
-
-    showWarning();
-    input.value = '';
-    console.log(allTasks);
-    saveList();
-})
-function showWarning(type) {
-    
-    warningText.textContent = "The button action cannot be performed because there are no active tasks.";
-
-    if (!toDoList.children.length) {
-        warningText.style.display = 'block';
-        return false;
+    if (localStorage.getItem('odd') === 'true') {
+        colorOddTasks(toDoList.classList.toggle('color__odd'));
     }
 
-    if (type === 'even') {
-        if (allTasks.length === 1) {
-
-            warningText.textContent = "We can't color the tasks because there are no even elements.";
-            warningText.style.display = 'block';
-            return false;
-        }
+    if (localStorage.getItem('even') === 'true') {
+        colorEvenTasks(toDoList.classList.toggle('color__even'));
     }
-        warningText.style.display = 'none';
-        return true;
 }
-
 function createToDoTask(text) {
 
     let task = document.createElement('li');
@@ -107,16 +75,13 @@ function createToDoTask(text) {
         changeTasksPosition();
         saveList();
     })
-
     btnDelete.addEventListener("click", function() {
-        console.log(allTasks)
         document.querySelector('.duplicate').style.display = 'none';
         
         task.style.opacity = 0;
         setTimeout(() => { task.remove(); }, 600);
 
-        allTasks.splice(indexItem,1);
-        console.log(allTasks)
+        allTasks.splice(indexItem,1); 
 
         allTasks.forEach((el, num) => {
             el.index = num;
@@ -124,12 +89,11 @@ function createToDoTask(text) {
 
         index--;
         saveList();
-        console.log(allTasks)
     })
+    function changeTasksPosition() { 
 
-    function changeTasksPosition() { //if we want to complete task
-
-        if (taskText.classList.toggle('task__complete')) {
+        if (taskText.classList.toggle('task__complete')) { //put complete task to the end
+            
             toDoList.append(task);
             btnComplete.textContent = "Return task";
 
@@ -137,7 +101,6 @@ function createToDoTask(text) {
             allTasks[allTasks.length-1].complete = true;
     
             allTasks.splice(indexItem, 1);
-
             indexItem = allTasks.length - 1;
             
             allTasks.forEach((item, i) => {
@@ -145,7 +108,7 @@ function createToDoTask(text) {
             })
         }
         
-        else {
+        else { //click on the btn a second time
             btnComplete.textContent = "Complete";
             allTasks[indexItem].complete = false;
         }
@@ -159,6 +122,34 @@ function createToDoTask(text) {
         index
     }
 }
+toDoForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    document.querySelector('.duplicate').style.display = 'none';
+    btnAddTask.disabled = true;
+
+    input.addEventListener('input', () => {
+        if (input.value) btnAddTask.disabled = false;
+    })
+
+    if (!input.value || !(checkDuplicate()))
+        return;
+
+    let toDoTask = createToDoTask(input.value);
+    
+    allTasks.push ({
+        complete: false,
+        taskText: toDoTask.taskText.textContent,
+        index
+    });
+    
+    //for new elements (if these btns are active)
+    if (toDoList.classList.contains("color__odd")) colorOddTasks(true);
+    if (toDoList.classList.contains('color__even')) colorEvenTasks(true);
+
+    input.value = '';
+    saveList();
+})
 function checkDuplicate() {
     let flag = true;
     allTasks.forEach(item => {
@@ -170,25 +161,24 @@ function checkDuplicate() {
     })
     return flag;
 }
-function addSaveTasks(item) {
-    allTasks.push(item);
+function showWarning(type) {
     
-    toDoTask = createToDoTask(item.taskText);
+    warningText.textContent = "The button action cannot be performed because there are no active tasks.";
 
-    if (item.complete === true) { 
-        toDoTask.taskText.classList.toggle('task__complete')
-        toDoTask.btnComplete.textContent = "Return task";
-    }
-}
-function addItemsColor() {
-    
-    if (localStorage.getItem('odd') === 'true') {
-        colorOddTasks(toDoList.classList.toggle('color__odd'));
+    if (!toDoList.children.length) {
+        warningText.style.display = 'block';
+        return false;
     }
 
-    if (localStorage.getItem('even') === 'true') {
-        colorEvenTasks(toDoList.classList.toggle('color__even'));
+    if (type === 'even') {
+        if (allTasks.length === 1) {
+            warningText.textContent = "We can't color the tasks because there are no even elements.";
+            warningText.style.display = 'block';
+            return false;
+        }
     }
+        warningText.style.display = 'none';
+        return true;
 }
 function colorOddTasks(flag) {
     if (flag) {
@@ -215,9 +205,9 @@ function colorEvenTasks(flag) {
 }
 function saveList() {
     localStorage.clear();
+
     allTasks.forEach((item, index) => {
         localStorage.setItem(`task #${index}`, JSON.stringify(item));
-        console.log(localStorage.getItem(`task #${index}`));
     })
 
     localStorage.setItem('odd', oddFlag);
@@ -234,16 +224,16 @@ btnDeleteLast.addEventListener('click', function() {
             colorOddTasks(true);
         if (toDoList.classList.contains('color__even'))
             colorEvenTasks(true);
+
         allTasks.pop();
         index--;
-        console.log(allTasks);
         saveList()
     }
 })
 btnDeleteFirst.addEventListener('click', function() {
     document.querySelector('.duplicate').style.display = 'none';
     if (showWarning('default')) {
-        //console.log(toDoList.children[0])
+
         toDoList.children[0].style.opacity = 0;
         setTimeout(() => { toDoList.children[0].remove(); }, 2000);
 
@@ -254,19 +244,18 @@ btnDeleteFirst.addEventListener('click', function() {
 
         allTasks.shift();
         index--;
-        console.log(allTasks)
-        saveList()
+        saveList();
     }
     
 })
 btnColorOdd.addEventListener('click', function() {
     document.querySelector('.duplicate').style.display = 'none';
     if (showWarning('default')) colorOddTasks(toDoList.classList.toggle('color__odd'));    
-    saveList()
+    saveList();
 })
 btnColorEven.addEventListener('click', function() {
     document.querySelector('.duplicate').style.display = 'none';
     if (showWarning('even')) colorEvenTasks(toDoList.classList.toggle('color__even'));
-    saveList()
+    saveList();
 })
 

@@ -180,8 +180,16 @@ form {
     transition: opacity 0.5s;
 }
 
+.item__task span {
+    margin-right: 10px;
+}
+
+.item__task div {
+    margin-left: 15px;
+}
+
 .btn__delete {
-    margin-left: 20px;
+    margin-left: 10px;
 }
 
 .task__complete {
@@ -200,3 +208,79 @@ form {
     background-color: #8982bc;
 }
 
+@media (max-width: 1330px) {
+    .container, .nav {
+        width: 70vw;
+    }
+
+    form, .todo__list {
+        width: 55vw;
+    }
+
+    .task__text {
+        width: 50vw;
+    }
+
+}
+@media (max-width: 950px) {
+    html { 
+        font-size: 14px;
+    }
+
+    .task__text {
+        width: 48vw;
+    }
+
+    .nav__btn {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav__btn .btn{
+        margin-right: 10px;
+        margin-bottom: 15px;
+    }
+
+    .nav {
+        padding-bottom: 15px; /*30 - 10mb*/
+        padding-right: 20px; /*30 - 10mr*/
+    }
+}
+@media (max-width: 740px) {
+    .task__text {
+        width: 45vw;
+    }
+    
+    .item__task {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .item__task span {
+        margin-bottom: 15px;
+        margin-right: 0;
+        text-align: center;
+    }
+
+    .item__task:not(:last-child) {
+        margin-bottom: 15px;
+    }
+
+    .item__task div {
+        margin-left: 0;
+    }
+}
+@media (max-width: 350px) {
+    .item__task div {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .btn__delete {
+        margin-left: 0;
+    }
+
+    .btn__complete {
+        margin-bottom: 15px;
+    }
+}
